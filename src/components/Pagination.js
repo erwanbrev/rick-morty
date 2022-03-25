@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 const showPage = (pageMax, pagenumber) => {
     let pageLink = [];
     for (let i = 1; i <= pageMax; i++) {
-        pageLink.push(<Link to={'/'+i}>{i}</Link>)
+        pageLink.push(<Link key={i} to={'/'+i}>{i}</Link>)
     }
-    console.log(pageLink, pageMax);
     return pageLink;
 }
 
@@ -23,7 +22,7 @@ const Pagination = (props) => {
                 (pageNumber > 1) &&
                     <Link to={'/'+(pageNumber - 1)}>{'<'}</Link>
             }
-            
+
             { showPage(pageMax, pageNumber) }
 
             {
