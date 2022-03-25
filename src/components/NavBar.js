@@ -5,7 +5,7 @@ const linkList = [
     ['/404', '404'],
 ]
 
-const navBar = () => {
+const NavBar = () => {
     return (
         <nav>
             <img src="https://picsum.photos/150/100"/>
@@ -20,4 +20,4 @@ const navBar = () => {
     )
 }
 
-export default navBar;
+export default NavBar;

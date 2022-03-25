@@ -1,9 +1,15 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Accueil from "./pages/Accueil";
 
 function App() {
   return (
     <div className="App">
-      <h1>Titre</h1>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={ <Accueil/> } />
+        <Route path="/:pageNumber" element={ <Accueil/> } />
+      </Routes>
     </div>
   );
 }
