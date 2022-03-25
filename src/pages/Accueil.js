@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
 import Perso from '../components/Perso';
 const Accueil = () => {
     let {pageNumber} = useParams(); // j'utilise les paramètre de l'url -> /:pageNumber donne un objet avec l'attribut pageNumber
@@ -36,6 +37,7 @@ const Accueil = () => {
                         <Perso persoDatas={item} key={item.id} />
                 )
             }
+            <Pagination pageMax={pageMax} pageNumber={pageNumber} />
         </div>
     )
 }
