@@ -21,9 +21,8 @@ const Accueil = () => {
         <div>
             {
                 APIDatas.map(
-                    item => {
+                    item => 
                         <Perso datas={item} key={item.id} />
-                    }
                 )
             }
         </div>
