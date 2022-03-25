@@ -1,6 +1,10 @@
-const Perso = () => {
+const Perso = (props) => {
+    let {name, image} = props.persoDatas
     return (
-        <h3>nom</h3>
+        <article className="perso">
+            <img src={image} />
+            <h3>{name}</h3>
+        </article>
     )
 }
 

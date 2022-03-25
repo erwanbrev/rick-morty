@@ -22,7 +22,7 @@ const Accueil = () => {
             {
                 APIDatas.map(
                     item => 
-                        <Perso datas={item} key={item.id} />
+                        <Perso persoDatas={item} key={item.id} />
                 )
             }
         </div>
