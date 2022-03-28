@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Grid from "../components/Grid";
 import Pagination from "../components/Pagination";
 import Perso from '../components/Perso';
 const Accueil = () => {
@@ -31,12 +32,14 @@ const Accueil = () => {
 
     return (
         <div>
-            {
-                APIDatas.map(
-                    item => 
-                        <Perso persoDatas={item} key={item.id} />
-                )
-            }
+            <Grid>
+                {
+                    APIDatas.map(
+                        item => 
+                            <Perso persoDatas={item} key={item.id} />
+                    )
+                }
+            </Grid>
             <Pagination pageMax={pageMax} pageNumber={pageNumber} />
         </div>
     )

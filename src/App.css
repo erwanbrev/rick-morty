@@ -12,6 +12,9 @@
     }
     aside {
         grid-area: aside;
+        align-self: start;
+        position:sticky;
+        top: 90px;
     }
     @media (max-width: 1000px) {
         .App {
