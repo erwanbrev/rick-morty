@@ -1,3 +1,5 @@
+import './Perso.css';
+
 const Perso = (props) => {
     let {name, image} = props.persoDatas
     return (
