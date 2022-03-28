@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-
+import logo from '../images/logo.png';
+import './NavBar.css'
 const linkList = [
     ['/', 'Home'],
     ['/404', '404'],
@@ -7,8 +8,8 @@ const linkList = [
 
 const NavBar = () => {
     return (
-        <nav>
-            <img src="https://picsum.photos/150/100"/>
+        <nav className="mainNav">
+            <img src={logo} />
             <div>
                 {
                     linkList.map(

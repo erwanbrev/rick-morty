@@ -1,0 +1,28 @@
+.App {
+    display: grid;
+    grid-template: 'nav nav nav nav' 80px
+                   '. mainContent aside .' auto / 10vw 2fr 1fr 10vw;
+    gap: 10px;
+}
+    .mainNav {
+        grid-area: nav;
+    }
+    .mainContent {
+        grid-area: mainContent;
+    }
+    aside {
+        grid-area: aside;
+    }
+    @media (max-width: 1000px) {
+        .App {
+            grid-template: 'nav nav nav nav' 80px
+                           '. mainContent aside .' auto / 5vw 2fr 1fr 5vw;
+        }
+    }
+    @media (max-width: 850px) {
+        .App {
+            grid-template: 'nav nav nav' 80px
+                           '. mainContent .' auto
+                           '. aside .' / 5vw 1fr 5vw;
+        }
+    }

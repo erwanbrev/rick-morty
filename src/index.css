@@ -5,9 +5,20 @@
 }
 
 :root {
+  --blue: #00afc7;
+  --blue-dark: #0e6568;
+  --green: #649b5d;
 
+  --bg-blue: hsl(187, 100%, 97%);
+
+  --white: #f8f8f8;
+  --black: #202020;
 }
 
 body {
   font-family: sans-serif;
+  background-color: var(--bg-blue);
+  color: var(--black);
 }
+
+  
