@@ -3,6 +3,7 @@ import logo from '../images/logo.png';
 import './NavBar.css'
 const linkList = [
     ['/', 'Home'],
+    ['/favoris', 'Favoris'],
     ['/404', '404'],
 ]
 

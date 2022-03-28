@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Accueil from "./pages/Accueil";
+import Favoris from "./pages/Favoris";
 
 import './App.css'
 
@@ -11,6 +12,7 @@ function App() {
       <div className="mainContent">
         <Routes>
           <Route path="/" element={ <Accueil/> } />
+          <Route path="/favoris" element={ <Favoris /> } />
           <Route path="/:pageNumber" element={ <Accueil/> } />
         </Routes>
       </div>
