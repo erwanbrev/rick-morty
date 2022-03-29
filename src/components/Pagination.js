@@ -16,7 +16,7 @@ const prevNextPages = (pageLink, pagenumber, pagemax = 0, withSearch = false, se
 const showPage = (pageMax, pagenumber, withSearch, search) => {
     let pageLink = [];
 
-    pageLink = prevNextPages(pageLink, pagenumber, withSearch, search) // les trois pages d'avant
+    pageLink = prevNextPages(pageLink, pagenumber, 0, withSearch, search) // les trois pages d'avant
     pageLink.push(<span key={pageLink.length} className="actualPage">{pagenumber}</span>) // j'ajoute la page actuelle
     pageLink = prevNextPages(pageLink, pagenumber, pageMax, withSearch, search, false) // les trois pages d'après
 
@@ -24,7 +24,6 @@ const showPage = (pageMax, pagenumber, withSearch, search) => {
 }
 
 const buildPath =  (num, withSearch, search) => {
-    console.log(withSearch, search);
     if (withSearch && search) {
         let url = '';
         for (let param of search.entries()) {
@@ -54,7 +53,7 @@ const Pagination = (props) => {
                     <Link to={buildPath(pageNumber - 1, props.withSearch, search)}>{'<'}</Link>
             }
 
-            { showPage(pageMax, pageNumber, props.withSearch, search, search) }
+            { showPage(pageMax, pageNumber, props.withSearch, search) }
 
             {
                 (pageNumber < pageMax) &&

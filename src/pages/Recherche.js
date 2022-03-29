@@ -8,6 +8,9 @@ const Recherche = () => {
 
     let [search, setSearch] = useSearchParams();
     let name = search.get('name')
+    let page = search.get('page')
+    if (!page)
+        page = 1
     let [persoName, setPresoName] = useState( name ? name : '' );
     let [persos, setPersos] = useState([]);
     let [pageMax, setPageMax] = useState(0);
@@ -26,8 +29,14 @@ const Recherche = () => {
         () => {
             let url = 'https://rickandmortyapi.com/api/character/';
             let name = search.get('name');
-            if (name)
+            let query = false;
+            if (name){
                 url += '?name='+name
+                query = true;
+            }
+            let page = search.get('page');
+            if (page)
+                url += (!query ? '?' : '&')+'page='+page
             fetch(url)
                 .then(response => response.json())
                 .then(personnages => {
@@ -56,7 +65,7 @@ const Recherche = () => {
                         <Grid>
                             { persos.map(item => <Perso key={item.id} persoDatas={item} />) }
                         </Grid>
-                        <Pagination pageMax={pageMax} pageNumber={1} withSearch />
+                        <Pagination pageMax={pageMax} pageNumber={page} withSearch />
                     </Fragment>
                 :
                     <p className="alert">Aucuns résultats pour votre recherche !</p>
