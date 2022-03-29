@@ -1,45 +1,47 @@
 import { Link, useSearchParams } from "react-router-dom";
 
-const prevNextPages = (pageLink, pagenumber, pagemax = 0, prev = true) => {
+const prevNextPages = (pageLink, pagenumber, pagemax = 0, withSearch = false, search, prev = true) => {
     // les 3 pages avant la notre
     for (let x = 1; x < 4; x++) { // je fais 3 tour de boucle
         let pageLinkNumber = (prev) ? (pagenumber - x) : (pagenumber + x) ; // je calcul le nouveau numero de page du lien
         if ((prev && pageLinkNumber < 1) || (!prev && pageLinkNumber > pagemax)) // si il est inférieur à 1
             break; // j'arrète la boucle
-        pageLink.push(<Link key={pageLink.length} to={"/"+pageLinkNumber}>{pageLinkNumber}</Link>) // sinon j'ajoute le lien a la liste
+        pageLink.push(<Link key={pageLink.length} to={buildPath(pageLinkNumber, withSearch, search)}>{pageLinkNumber}</Link>) // sinon j'ajoute le lien a la liste
     }
     if (prev)
         pageLink.reverse(); // je remets les pages dans le bon ordre
     return pageLink;
 }
 
-const showPage = (pageMax, pagenumber) => {
+const showPage = (pageMax, pagenumber, withSearch, search) => {
     let pageLink = [];
 
-    pageLink = prevNextPages(pageLink, pagenumber) // les trois pages d'avant
+    pageLink = prevNextPages(pageLink, pagenumber, withSearch, search) // les trois pages d'avant
     pageLink.push(<span key={pageLink.length} className="actualPage">{pagenumber}</span>) // j'ajoute la page actuelle
-    pageLink = prevNextPages(pageLink, pagenumber, pageMax, false) // les trois pages d'après
+    pageLink = prevNextPages(pageLink, pagenumber, pageMax, withSearch, search, false) // les trois pages d'après
 
     return pageLink;
+}
+
+const buildPath =  (num, withSearch, search) => {
+    if (withSearch) {
+        let url = '';
+        for (let param of search.entries()) {
+            if (param[0] === 'page')
+                continue;
+            url += ((url === '') ? '?' : '&' )+param[0]+'='+param[1]
+        }
+        return url+(url === '' ? '?' : '&' )+'page='+num;
+    } else {
+        return '/'+num
+    }
 }
 
 const Pagination = (props) => {
 
     let {pageMax, pageNumber} = props;
-    let [search, setSearch] = useSearchParams();
+    let [search] = useSearchParams();
 
-    const buildPath =  (num) => {
-
-        if (props.withSearch) {
-            let url = '';
-            for (let param of search.entries()) {
-                url += ((url === '') ? '?' : '&' )+param[0]+'='+param[1]
-            }
-            return url+'&page='+num;
-        } else {
-            return '/'+num
-        }
-    }
     return (
         <div className="pagination">
             {
@@ -51,7 +53,7 @@ const Pagination = (props) => {
                     <Link to={buildPath(pageNumber - 1)}>{'<'}</Link>
             }
 
-            { showPage(pageMax, pageNumber) }
+            { showPage(pageMax, pageNumber, props.withSearch, search) }
 
             {
                 (pageNumber < pageMax) &&
