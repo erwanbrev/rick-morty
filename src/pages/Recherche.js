@@ -9,8 +9,8 @@ const Recherche = () => {
     let [search, setSearch] = useSearchParams();
     let name = search.get('name')
     let page = search.get('page')
-    if (!page)
-        page = 1
+    page = (!page) ? 1 : +(page)
+        
     let [persoName, setPresoName] = useState( name ? name : '' );
     let [persos, setPersos] = useState([]);
     let [pageMax, setPageMax] = useState(0);
