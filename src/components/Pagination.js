@@ -24,7 +24,8 @@ const showPage = (pageMax, pagenumber, withSearch, search) => {
 }
 
 const buildPath =  (num, withSearch, search) => {
-    if (withSearch) {
+    console.log(withSearch, search);
+    if (withSearch && search) {
         let url = '';
         for (let param of search.entries()) {
             if (param[0] === 'page')
