@@ -31,3 +31,7 @@
     height: 44px;
     width: 44px;
 }
+
+.favorite.active {
+    background-color: var(--blue);
+}
