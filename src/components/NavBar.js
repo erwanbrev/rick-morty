@@ -11,7 +11,7 @@ const NavBar = () => {
     const linkList = [
         ['/', 'Home'],
         ['/favoris', 'Favoris ('+favContext.favs.length+')'],
-        ['/404', '404'],
+        ['/rechercher', 'Recherche'],
     ]
     
     return (

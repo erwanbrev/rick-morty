@@ -6,6 +6,7 @@ import Favoris from "./pages/Favoris";
 import './App.css'
 import FavoriteContext from "./FavoriteContext";
 import { useEffect, useState } from "react";
+import Recherche from "./pages/Recherche";
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <Accueil/> } />
           <Route path="/favoris" element={ <Favoris /> } />
+          <Route path="/rechercher" element={ <Recherche /> } />
           <Route path="/:pageNumber" element={ <Accueil/> } />
         </Routes>
       </div>
