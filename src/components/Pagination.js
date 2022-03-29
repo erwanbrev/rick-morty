@@ -46,22 +46,22 @@ const Pagination = (props) => {
         <div className="pagination">
             {
                 (pageNumber > 1) &&
-                    <Link to={buildPath(1)}>{'<<'}</Link>
+                    <Link to={buildPath(1, props.withSearch, search)}>{'<<'}</Link>
             }
             {
                 (pageNumber > 1) &&
-                    <Link to={buildPath(pageNumber - 1)}>{'<'}</Link>
+                    <Link to={buildPath(pageNumber - 1, props.withSearch, search)}>{'<'}</Link>
             }
 
-            { showPage(pageMax, pageNumber, props.withSearch, search) }
+            { showPage(pageMax, pageNumber, props.withSearch, search, search) }
 
             {
                 (pageNumber < pageMax) &&
-                    <Link to={buildPath(pageNumber + 1)}>{'>'}</Link>
+                    <Link to={buildPath(pageNumber + 1, props.withSearch, search)}>{'>'}</Link>
             }
             {
                 (pageNumber < pageMax) &&
-                    <Link to={buildPath(pageMax)}>{'>>'}</Link>
+                    <Link to={buildPath(pageMax, props.withSearch, search)}>{'>>'}</Link>
             }
         </div>
     )
