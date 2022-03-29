@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const prevNextPages = (pageLink, pagenumber, pagemax = 0, prev = true) => {
     // les 3 pages avant la notre
@@ -26,27 +26,40 @@ const showPage = (pageMax, pagenumber) => {
 const Pagination = (props) => {
 
     let {pageMax, pageNumber} = props;
+    let [search, setSearch] = useSearchParams();
 
+    const buildPath =  (num) => {
+
+        if (props.withSearch) {
+            let url = '';
+            for (let param of search.entries()) {
+                url += ((url === '') ? '?' : '&' )+param[0]+'='+param[1]
+            }
+            return url+'&page='+num;
+        } else {
+            return '/'+num
+        }
+    }
     return (
         <div className="pagination">
             {
                 (pageNumber > 1) &&
-                    <Link to='/1'>{'<<'}</Link>
+                    <Link to={buildPath(1)}>{'<<'}</Link>
             }
             {
                 (pageNumber > 1) &&
-                    <Link to={'/'+(pageNumber - 1)}>{'<'}</Link>
+                    <Link to={buildPath(pageNumber - 1)}>{'<'}</Link>
             }
 
             { showPage(pageMax, pageNumber) }
 
             {
                 (pageNumber < pageMax) &&
-                    <Link to={'/'+(pageNumber + 1)}>{'>'}</Link>
+                    <Link to={buildPath(pageNumber + 1)}>{'>'}</Link>
             }
             {
                 (pageNumber < pageMax) &&
-                    <Link to={'/'+(pageMax)}>{'>>'}</Link>
+                    <Link to={buildPath(pageMax)}>{'>>'}</Link>
             }
         </div>
     )

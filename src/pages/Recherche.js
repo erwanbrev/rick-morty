@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Grid from "../components/Grid";
+import Pagination from "../components/Pagination";
 import Perso from "../components/Perso";
 
 const Recherche = () => {
@@ -9,6 +10,7 @@ const Recherche = () => {
     let name = search.get('name')
     let [persoName, setPresoName] = useState( name ? name : '' );
     let [persos, setPersos] = useState([]);
+    let [pageMax, setPageMax] = useState(0);
     // liste des besoin pour faire une recherche
     // possibilitée de varier la recherche -> nom de personnage, page
     const handleSubmit = (e) => {
@@ -29,6 +31,9 @@ const Recherche = () => {
             fetch(url)
                 .then(response => response.json())
                 .then(personnages => {
+                    if ('info' in personnages) {
+                        setPageMax(personnages.info.pages)
+                    }
                     if ('results' in personnages) {
                         setPersos(personnages.results)
                     } else {
@@ -47,9 +52,12 @@ const Recherche = () => {
             </form>
             {
                 (persos.length) ?
-                    <Grid>
-                        { persos.map(item => <Perso key={item.id} persoDatas={item} />) }
-                    </Grid>
+                    <Fragment>
+                        <Grid>
+                            { persos.map(item => <Perso key={item.id} persoDatas={item} />) }
+                        </Grid>
+                        <Pagination pageMax={pageMax} pageNumber={1} withSearch />
+                    </Fragment>
                 :
                     <p className="alert">Aucuns résultats pour votre recherche !</p>
             }
